@@ -1,7 +1,28 @@
-const countries = [
+const europe = [
     {
-    "country": "Spain",
-    "dish": "Paella",
-    "drink": "Sangria"
+    country: "spain",
+    dish: "paella",
+    language: "spanish",
+    flagCode: "ES"
     },
-]
+];
+
+const africa = [
+    {},
+];
+
+const northAmerica = [
+    {},
+];
+
+const southAmerica = [
+    {},
+];
+
+const asia = [
+    {},
+];
+
+const oceania = [
+    {},
+];

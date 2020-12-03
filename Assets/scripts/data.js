@@ -184,12 +184,27 @@ const northAmerica = [
     country: "El Salvador",
     dish: "Beef, Poblano & Cheese Tamales",
     language: "English",
-    flagCode: "JM",
+    flagCode: "ES",
     id: 634727,
   },
 ];
 
-const southAmerica = [{}];
+const southAmerica = [
+  {
+    country: "Argentina",
+    dish: "Argentine-Style Empanadas",
+    language: "Spanish",
+    flagCode: "AR",
+    id: 632706,
+  },
+  {
+    country: "Peru",
+    dish: "Liz's Lomo Saltado",
+    language: "Spanish",
+    flagCode: "PE",
+    id: 650225,
+  },  
+];
 
 const asia = [
   {

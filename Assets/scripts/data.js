@@ -130,9 +130,81 @@ const africa = [
   },
 ];
 
-const northAmerica = [{}];
+const northAmerica = [
+  {
+    country: "Trinidad & Tobago",
+    dish: "Trinidad Callaloo Soup",
+    language: "English",
+    flagCode: "TT",
+    id: 663822,
+  },
+  {
+    country: "USA",
+    dish: "An American Beef Burger",
+    language: "English",
+    flagCode: "US",
+    id: 632342,
+  },
+  {
+    country: "Canada",
+    dish: "Poached Pear and Brown Butter Tart",
+    language: "English",
+    flagCode: "CA",
+    id: 656496,
+  },
+  {
+    country: "Cuba",
+    dish: "Picadillo Wraps",
+    language: "Spanish",
+    flagCode: "CU",
+    id: 1096008,
+  },
+  {
+    country: "Costa Rica",
+    dish: "Instant Pot Black Beans",
+    language: "Spanish",
+    flagCode: "CR",
+    id: 1153778,
+  },
+  {
+    country: "Jamaica",
+    dish: "Jerk Grilled Pork Chops",
+    language: "English",
+    flagCode: "JM",
+    id: 648567,
+  },
+  {
+    country: "Jamaica",
+    dish: "Jerk Grilled Pork Chops",
+    language: "English",
+    flagCode: "JM",
+    id: 648567,
+  },
+  {
+    country: "El Salvador",
+    dish: "Beef, Poblano & Cheese Tamales",
+    language: "English",
+    flagCode: "ES",
+    id: 634727,
+  },
+];
 
-const southAmerica = [{}];
+const southAmerica = [
+  {
+    country: "Argentina",
+    dish: "Argentine-Style Empanadas",
+    language: "Spanish",
+    flagCode: "AR",
+    id: 632706,
+  },
+  {
+    country: "Peru",
+    dish: "Liz's Lomo Saltado",
+    language: "Spanish",
+    flagCode: "PE",
+    id: 650225,
+  },  
+];
 
 const asia = [
   {

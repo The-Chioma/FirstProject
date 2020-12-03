@@ -84,13 +84,13 @@ const asia = [
     flagCode: "TH",
     id:"663121" ,
   },
-  {
-    country: "cyprus",
-    dish: "Marinated Souvlaki",
-    language: "greek",
-    flagCode: "CY",
-    id:"651076" ,
-  },
+    {
+        country: "cyprus",
+        dish: "Marinated Souvlaki",
+        language: "greek",
+        flagCode: "CY",
+        id:"651076" ,
+      },
 ];
 
 const oceania = [

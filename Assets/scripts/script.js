@@ -1,7 +1,7 @@
 $(function () {
-  const apikey = "0ca619dbe1c54687905affcae7c39231";
-  // "813168050135472e9820b823b47943fa";
-
+  const apikey = "5d40d9682d6a4dbd937695decef827d3";//3
+  // "0ca619dbe1c54687905affcae7c39231" //1
+  // "813168050135472e9820b823b47943fa";//2
   //display continents 1-7
   //user must select 1 min - max 7
   //user clicks 'submit' event listner
@@ -48,19 +48,30 @@ $(function () {
       url: queryurl,
       method: "GET",
       success: function (response) {
-
-        console.log(response);
+        $("#dish-container").empty();
 
         var dishTitle = response.title;
-        console.log(dishTitle)
+        var titleEl = $("<h2 id='dish-header'>");
+        titleEl.text(dishTitle);
 
         var dishImgSrc = response.image;
-        console.log(dishImgSrc)
+        var dishImgEl = $("<img id='dish-img'>");
+        dishImgEl.attr('src', dishImgSrc);
 
+
+        //get the recipeArr
         var recipeArr = response.analyzedInstructions[0].steps;
-        console.log(recipeArr);
+        //create an ordered list
+        var recipeList = $("<ol id='recipe-list'>");
+        //loop through the recipeArr and create the list elements and append
+        recipeArr.forEach(step => {
+          var recipeStepEl = $("<li class='recipe-step'>");
+          recipeStepEl.text(step.step);
+          recipeList.append(recipeStepEl);
+        })
 
 
+        $("#dish-container").append(titleEl, dishImgEl, recipeList);
 
 
         //creates the img source

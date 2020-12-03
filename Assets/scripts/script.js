@@ -35,6 +35,7 @@ $(function () {
     var randomNumber = Math.floor(Math.random() * selectedCountriesArr.length);
     //selects the country object;
     var randomCountry = selectedCountriesArr[randomNumber];
+    var countryName = randomCountry.country;
     //get the id from the country
     var id = randomCountry.id;
     //get the flagcode from the country object
@@ -50,14 +51,31 @@ $(function () {
       success: function (response) {
         $("#dish-container").empty();
 
+        var displayCountryName = $("<h2>").text("This dish is inspired by the country of " + countryName)
+
         var dishTitle = response.title;
-        var titleEl = $("<h2 id='dish-header'>");
+        var titleEl = $("<h3 id='dish-header'>");
         titleEl.text(dishTitle);
 
         var dishImgSrc = response.image;
         var dishImgEl = $("<img id='dish-img'>");
         dishImgEl.attr('src', dishImgSrc);
 
+        var ingredientsHeading = $("<h2>");
+        ingredientsHeading.text("Ingredients:");
+
+        //created and looped through the ingredients array
+        var ingredientsArr = response.extendedIngredients;
+        console.log(ingredientsArr);
+        var ingredientsList = $("<ul id='ingredients-list'>")
+        ingredientsArr.forEach(ingredient => {
+          var ingredientsEl = $("<li class='ingredient'>")
+          ingredientsEl.text(ingredient.original);
+          ingredientsList.append(ingredientsEl);
+        })
+
+        var recipeHeading = $("<h2>");
+        recipeHeading.text("Recipe: ")
 
         //get the recipeArr
         var recipeArr = response.analyzedInstructions[0].steps;
@@ -70,8 +88,8 @@ $(function () {
           recipeList.append(recipeStepEl);
         })
 
-
-        $("#dish-container").append(titleEl, dishImgEl, recipeList);
+        //logic for ingredients is at the bottom and needs to be added
+        $("#dish-container").append(displayCountryName, titleEl, dishImgEl, ingredientsHeading, ingredientsList, recipeHeading, recipeList);
 
 
         //creates the img source
@@ -84,16 +102,5 @@ $(function () {
     });
   }
   $("#submitBtn").on("click", countrySelection);
-
-  //random country picked
-  //make API calls
-  //build object dynamically on page
-  // Name of dish
-  // res.title
-  // image
-  // res.image
-  // recipe
-  // res.analyzedInstructions[0].steps (is an array of objects)
-
-  //add buttons - 'save' to or 'remove' from local storage
+  
 });

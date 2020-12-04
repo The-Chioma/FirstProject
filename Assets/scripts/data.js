@@ -174,11 +174,11 @@ const northAmerica = [
     id: 648567,
   },
   {
-    country: "Jamaica",
-    dish: "Jerk Grilled Pork Chops",
+    country: "Barbados",
+    dish: "Rice and Peas with Coconut Curry Mackerel",
     language: "English",
-    flagCode: "JM",
-    id: 648567,
+    flagCode: "BB",
+    id: 716364,
   },
   {
     country: "El Salvador",
@@ -204,18 +204,61 @@ const southAmerica = [
     flagCode: "PE",
     id: 650225,
   },  
+  {
+    country: "Bolivia",
+    dish: "Choco Coco Loco Empanada Dessert",
+    language: "Spanish",
+    flagCode: "BO",
+    id: 638784,
+  },  
+  {
+    country: "Chile",
+    dish: "Chile Relleno Casserole",
+    language: "Spanish",
+    flagCode: "CL",
+    id: 638534,
+  },  
+  {
+    country: "Colombia",
+    dish: "Salsa Verde Chicken Tamales",
+    language: "Spanish",
+    flagCode: "CO",
+    id: 659180,
+  },  
+  {
+    country: "Guyana",
+    dish: "Fried Yam and Spicy Mayo",
+    language: "English",
+    flagCode: "GY",
+    id: 716279,
+  },  
+  {
+    country: "Ecuador ",
+    dish: "Grilled Fish Tacos with Spicy Tequila-Lime Guacamole",
+    language: "Spanish",
+    flagCode: "CO",
+    id: 650225,
+  },  
+  {
+    country: "Venezuela",
+    dish: "Buttered Plantain Fries and Seasoned Avocado",
+    language: "Spanish",
+    flagCode: "VE",
+    id: 800754,
+  },  
+
 ];
 
 const asia = [
   {
-    country: "vietnam",
+    country: "Vietnam",
     dish: "Vietnamese", //( title: "Vietnamese Banh Mi")
     language: "Vietnamese",
     flagCode: "VN",
     id: 664828,
   },
   {
-    country: "china",
+    country: "China",
     dish: "Fried Rice", //Chinese comfort food""
     language: "Mandarin",
     flagCode: "CN",
@@ -236,7 +279,7 @@ const asia = [
     id: 639807,
   },
   {
-    country: "malaysia",
+    country: "Malaysia",
     dish: "Malaysian Sambal Kangkong (Water Spinach)",
     language: "malay",
     flagCode: "MY",
@@ -278,7 +321,7 @@ const asia = [
     id: 663121,
   },
   {
-    country: "cyprus",
+    country: "Cyprus",
     dish: "Marinated Souvlaki",
     language: "greek",
     flagCode: "CY",
@@ -288,14 +331,14 @@ const asia = [
 
 const oceania = [
   {
-    country: "australia",
+    country: "Australia",
     dish: "lamb", //roast lamb
     language: "english",
     flagCode: "AU",
     id: 641973,
   },
   {
-    country: "new zealand",
+    country: "New Zealand",
     dish: "Pie-meat",
     language: "english",
     flagCode: "NZ",
@@ -309,7 +352,7 @@ const oceania = [
     id: 1096262,
   },
   {
-    country: "fiji",
+    country: "Fiji",
     dish: "Grilled fish", //Grilled Fish Tacos with Spicy Tequila-Lime Guacamole"
     language: "Fijian",
     flagCode: "FJ",

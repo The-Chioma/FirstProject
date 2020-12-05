@@ -9,6 +9,8 @@ $(function () {
 
   var prevRecipes = [];
 
+  var dropdownMenuIsDown = false;
+
   if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
     //we check to see if localstorage does not equal null. If so, then we store it in the variable
     prevRecipes = JSON.parse(localStorage.getItem("prevCountriesRecipe"));
@@ -72,6 +74,7 @@ $(function () {
 
         var dishTitle = response.title;
         var titleEl = $("<h3 id='dish-header'>");
+        titleEl.attr("data-dishId", id); // save the id for the recipe so we can access it later for local storage
         titleEl.text(dishTitle);
 
         var dishImgSrc = response.image;
@@ -109,6 +112,11 @@ $(function () {
         var saveIcon = $("<i class='fas fa-hamburger'>");
         saveBtn.text("Save Recipe");
         saveBtn.append(saveIcon);
+                //creates the img source
+                var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
+                //creates an img element with the flag source
+                var flagImgElement = $("<img>");
+                flagImgElement.attr("src", flagImageSrc);
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
@@ -119,17 +127,34 @@ $(function () {
           ingredientsList,
           recipeHeading,
           recipeList,
-          saveBtn
+          saveBtn,
+          flagImgElement
         );
 
-        //creates the img source
-        var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-        //creates an img element with the flag source
-        var flagImgElement = $("<img>");
-        flagImgElement.attr("src", flagImageSrc);
-        $("body").append(flagImgElement);
       },
     });
+  };
+
+  function displayDropdown(){
+    if (!dropdownMenuIsDown){
+      var dropmenuList = $("<ul id='dropdownList'>");
+      dropmenuList.css("display", "none");
+      prevRecipes.forEach(country => {
+        var countryListElement = $("<li class='dropdownItem'>");//temporary classname to be changed with tailwind;
+        countryListElement.text(country.countryName).attr('data-listId', country.id);
+        dropmenuList.append(countryListElement);
+      })
+      $("body").append(dropmenuList);
+      $("#dropdownList").slideDown(400);
+      dropdownMenuIsDown = true;
+    } else {
+      $("#dropdownList").slideUp(400, function(){
+        $("#dropdownList").remove();
+      });
+      dropdownMenuIsDown = false;
+      
+    }
+
   }
 
   function modalDisplay() {
@@ -161,9 +186,23 @@ $(function () {
     var id = $(this).attr("id");
     if (id === "yesBtn") {
       var countryName = $("#countryHeader").attr("data-countryName");
-      // logic to check local storage for existing Country
-      if (!prevRecipes.includes(countryName)) {
-        prevRecipes.push(countryName);
+      var dishId = $("#dish-header").attr("data-dishId");
+      var countryToBeSaved = {
+        countryName: countryName,
+        id: dishId
+      };
+      console.log('the country name is', countryToBeSaved.countryName);
+      console.log('the ID is', countryToBeSaved.id);
+      //we create an object with the data we need
+
+      // logic to check local storage for existing Country, using every method to check the countryname of each object
+      if (
+        prevRecipes.every((dishElement) => {
+          //.every checks every element in an array. if it finds an element which returns false, the every method returns false and stops
+          return dishElement.countryName !== countryName;
+        })
+      ) {
+        prevRecipes.push(countryToBeSaved);
         localStorage.setItem(
           "prevCountriesRecipe",
           JSON.stringify(prevRecipes)
@@ -199,9 +238,11 @@ $(function () {
   $("body").on("click", "button#saveBtn", modalDisplay); //displays the modal box and generates all the elements
 
   $("body").on("click", "button.confirmBtn", saveToLocalStorage); // save button on click function, save to local storage
+
+  $("body").on("click", "button#historyDropdownBtn", displayDropdown);
 });
 
 //check if local storage exists X
 //store in variable X
 //give user access to prev storage
-//giver user option to save new LS
+//giver user option to save new LS x

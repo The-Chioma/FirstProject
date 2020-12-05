@@ -1,5 +1,5 @@
 $(function () {
-  const apikey = "5d40d9682d6a4dbd937695decef827d3";//3
+  const apikey = "5d40d9682d6a4dbd937695decef827d3"; //3
   // "0ca619dbe1c54687905affcae7c39231" //1
   // "813168050135472e9820b823b47943fa";//2
   //display continents 1-7
@@ -9,18 +9,15 @@ $(function () {
 
   var prevRecipes = [];
 
-  if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null){//we check to see if localstorage does not equal null. If so, then we store it in the variable
+  if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
+    //we check to see if localstorage does not equal null. If so, then we store it in the variable
     prevRecipes = JSON.parse(localStorage.getItem("prevCountriesRecipe"));
     var dropdownBtn = $("<button id='historyDropdownBtn'>");
-    dropdownBtn.text('Saved Recipes');
+    dropdownBtn.text("Saved Recipes ");
     var dropdownIcon = $("<i class='fas fa-utensils'>");
     dropdownBtn.append(dropdownIcon);
     $("#mainDiv").append(dropdownBtn);
-  };
-
-
-
-
+  }
 
   function countrySelection() {
     //empty array to dynamically pick a country from the users selection
@@ -59,7 +56,6 @@ $(function () {
 
     var queryurl =
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=` + apikey;
-    
 
     $.ajax({
       url: queryurl,
@@ -69,8 +65,10 @@ $(function () {
         //we store the country name in a html data attribute so that we can access it later for the modal
         var displayHeader = $("<h2 id='countryHeader'>");
         //countryName is a variable in local scope
-        displayHeader.attr('data-countryName', countryName);
-        displayHeader.text("This dish is inspired by the country of " + countryName)
+        displayHeader.attr("data-countryName", countryName);
+        displayHeader.text(
+          "This dish is inspired by the country of " + countryName
+        );
 
         var dishTitle = response.title;
         var titleEl = $("<h3 id='dish-header'>");
@@ -78,7 +76,7 @@ $(function () {
 
         var dishImgSrc = response.image;
         var dishImgEl = $("<img id='dish-img'>");
-        dishImgEl.attr('src', dishImgSrc);
+        dishImgEl.attr("src", dishImgSrc);
 
         var ingredientsHeading = $("<h2>");
         ingredientsHeading.text("Ingredients:");
@@ -86,22 +84,22 @@ $(function () {
         //created and looped through the ingredients array
         var ingredientsArr = response.extendedIngredients;
         console.log(ingredientsArr);
-        var ingredientsList = $("<ul id='ingredients-list'>")
-        ingredientsArr.forEach(ingredient => {
-          var ingredientsEl = $("<li class='ingredient'>")
+        var ingredientsList = $("<ul id='ingredients-list'>");
+        ingredientsArr.forEach((ingredient) => {
+          var ingredientsEl = $("<li class='ingredient'>");
           ingredientsEl.text(ingredient.original);
           ingredientsList.append(ingredientsEl);
-        })
+        });
 
         var recipeHeading = $("<h2>");
-        recipeHeading.text("Recipe: ")
+        recipeHeading.text("Recipe: ");
 
         //get the recipeArr
         var recipeArr = response.analyzedInstructions[0].steps;
         //create an ordered list
         var recipeList = $("<ol id='recipe-list'>");
         //loop through the recipeArr and create the list elements and append
-        recipeArr.forEach(step => {
+        recipeArr.forEach((step) => {
           var recipeStepEl = $("<li class='recipe-step'>");
           recipeStepEl.text(step.step);
           recipeList.append(recipeStepEl);
@@ -109,58 +107,88 @@ $(function () {
 
         var saveBtn = $("<button id='saveBtn'>");
         var saveIcon = $("<i class='fas fa-hamburger'>");
-        saveBtn.text('Save Recipe');
+        saveBtn.text("Save Recipe");
         saveBtn.append(saveIcon);
 
-
         //logic for ingredients is at the bottom and needs to be added
-        $("#dish-container").append(displayHeader, titleEl, dishImgEl, ingredientsHeading, ingredientsList, recipeHeading, recipeList, saveBtn);
-
+        $("#dish-container").append(
+          displayHeader,
+          titleEl,
+          dishImgEl,
+          ingredientsHeading,
+          ingredientsList,
+          recipeHeading,
+          recipeList,
+          saveBtn
+        );
 
         //creates the img source
         var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
         //creates an img element with the flag source
-        var flagImgElement = $("<img>")
+        var flagImgElement = $("<img>");
         flagImgElement.attr("src", flagImageSrc);
-        $("body").append(flagImgElement)
+        $("body").append(flagImgElement);
       },
     });
-  };
+  }
 
-  function modalDisplay(){
+  function modalDisplay() {
     //we create a modal box which will display in front of content for user to save recipes to local storage
     var modalContainer = $("<div id='modal-box'>");
     var modalHeader = $("<h2 id='modal-header'>");
     // we grab the current country name from the html data attribute;
-    var countryName = $("#countryHeader").attr('data-countryName');
+    var countryName = $("#countryHeader").attr("data-countryName");
     modalHeader.text(`Would you like to save this recipe from ${countryName}?`);
 
     // we add yes and no buttons for user to confirm
 
     //we give each the same class so we can add one click listener. We will add style with tailwind
     var yesBtn = $("<button class='confirmBtn' id='yesBtn'>");
-    var yesIcon = $('<i class="fas fa-check">')
+    var yesIcon = $('<i class="fas fa-check">');
+    yesBtn.text("Yes ");
     yesBtn.append(yesIcon);
-    yesBtn.text('Yes');
-    var noBtn = $("<buttton class='confirmBtn' id='noBtn'>");
+    
+    var noBtn = $("<button class='confirmBtn' id='noBtn'>");
     var noIcon = $("<i class='fas fa-times'>");
-    noBtn.append(noIcon);
-    noBtn.text('No');
+     noBtn.text("No ");
+     noBtn.append(noIcon);
+   
 
     modalContainer.append(modalHeader, yesBtn, noBtn);
     $("body").append(modalContainer);
   }
+// logic for save button - to local storage
+function saveToLocalStorage(){
+  var id = $(this).attr("id")
+  if(id ==='yesBtn'){
+  var countryName = $("#countryHeader").attr("data-countryName");
+   // logic to check local storage for existing Country
+    if(!prevRecipes.includes(countryName))
+    {prevRecipes.push(countryName)
+    localStorage.setItem("prevCountriesRecipe", JSON.stringify(prevRecipes))}
 
+    else{ 
+      // logic if user has already saved this recipe to storage 
+      var existingCountry = $("<p id='modalMsg'>")
+      existingCountry.text ("You have already saved this recipe") // will style later 
+      $('#modal-box').append(existingCountry)
+       }}
+// logic if 'NO' is clicked for modal button 
+   else{
+     $('#modal-box').fadeOut(500)
 
+   }
+}
 
   //click listeners
-  $("#submitBtn").on("click", countrySelection);//runs the function for picking a country at random based on user input and calls the API
+  $("#submitBtn").on("click", countrySelection); //runs the function for picking a country at random based on user input and calls the API
 
-  $("body").on("click", 'button#saveBtn', modalDisplay);//displays the modal box and generates all the elements
-  
+  $("body").on("click", "button#saveBtn", modalDisplay); //displays the modal box and generates all the elements
+
+  $("body").on("click", "button.confirmBtn", saveToLocalStorage); // save button on click function, save to local storage
 });
 
-//check if local storage exists
-//store in variable
+//check if local storage exists X
+//store in variable X
 //give user access to prev storage
 //giver user option to save new LS

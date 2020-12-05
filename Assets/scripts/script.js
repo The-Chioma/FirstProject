@@ -54,8 +54,11 @@ $(function () {
     //get the id from the country
     var id = randomCountry.id;
     //get the flagcode from the country object
-    var flagCode = randomCountry.flagCode;
+    var flagCode = randomCountry.flagCode;  
+    getRecipe(countryName, id, flagCode);
+  };
 
+  function getRecipe(countryName, id, flagCode){
     var queryurl =
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=` + apikey;
 
@@ -112,11 +115,12 @@ $(function () {
         var saveIcon = $("<i class='fas fa-hamburger'>");
         saveBtn.text("Save Recipe");
         saveBtn.append(saveIcon);
+                //creates an img element with the flag source
+                var flagImgElement = $("<img id= 'flagImg'>");
                 //creates the img source
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-                //creates an img element with the flag source
-                var flagImgElement = $("<img>");
                 flagImgElement.attr("src", flagImageSrc);
+                flagImgElement.attr("data-flagCode", flagCode);
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
@@ -133,8 +137,7 @@ $(function () {
 
       },
     });
-  };
-
+  }
   function displayDropdown(){
     if (!dropdownMenuIsDown){
       var dropmenuList = $("<ul id='dropdownList'>");
@@ -187,9 +190,11 @@ $(function () {
     if (id === "yesBtn") {
       var countryName = $("#countryHeader").attr("data-countryName");
       var dishId = $("#dish-header").attr("data-dishId");
+      var flagId = $("#flagImg").attr("data-flagCode");
       var countryToBeSaved = {
         countryName: countryName,
-        id: dishId
+        id: dishId,
+        flagId: flagId
       };
       console.log('the country name is', countryToBeSaved.countryName);
       console.log('the ID is', countryToBeSaved.id);
@@ -240,9 +245,15 @@ $(function () {
   $("body").on("click", "button.confirmBtn", saveToLocalStorage); // save button on click function, save to local storage
 
   $("body").on("click", "button#historyDropdownBtn", displayDropdown);
+
+  
 });
 
 //check if local storage exists X
 //store in variable X
 //give user access to prev storage
 //giver user option to save new LS x
+
+// citiesSearched.on("click", "li", function() {
+//return getCurrentWeather($(this).text());
+//});

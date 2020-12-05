@@ -147,38 +147,51 @@ $(function () {
     var yesIcon = $('<i class="fas fa-check">');
     yesBtn.text("Yes ");
     yesBtn.append(yesIcon);
-    
+
     var noBtn = $("<button class='confirmBtn' id='noBtn'>");
     var noIcon = $("<i class='fas fa-times'>");
-     noBtn.text("No ");
-     noBtn.append(noIcon);
-   
+    noBtn.text("No ");
+    noBtn.append(noIcon);
 
     modalContainer.append(modalHeader, yesBtn, noBtn);
     $("body").append(modalContainer);
   }
-// logic for save button - to local storage
-function saveToLocalStorage(){
-  var id = $(this).attr("id")
-  if(id ==='yesBtn'){
-  var countryName = $("#countryHeader").attr("data-countryName");
-   // logic to check local storage for existing Country
-    if(!prevRecipes.includes(countryName))
-    {prevRecipes.push(countryName)
-    localStorage.setItem("prevCountriesRecipe", JSON.stringify(prevRecipes))}
-
-    else{ 
-      // logic if user has already saved this recipe to storage 
-      var existingCountry = $("<p id='modalMsg'>")
-      existingCountry.text ("You have already saved this recipe") // will style later 
-      $('#modal-box').append(existingCountry)
-       }}
-// logic if 'NO' is clicked for modal button 
-   else{
-     $('#modal-box').fadeOut(500)
-
-   }
-}
+  // logic for save button - to local storage
+  function saveToLocalStorage() {
+    var id = $(this).attr("id");
+    if (id === "yesBtn") {
+      var countryName = $("#countryHeader").attr("data-countryName");
+      // logic to check local storage for existing Country
+      if (!prevRecipes.includes(countryName)) {
+        prevRecipes.push(countryName);
+        localStorage.setItem(
+          "prevCountriesRecipe",
+          JSON.stringify(prevRecipes)
+        );
+        var successMsg = $("<p id='modalSuccessMsg'>");
+        successMsg.text("You have successfully saved this recipe"); // will style later
+        $("#modal-box").append(successMsg);
+      } else {
+        // logic if user has already saved this recipe to storage
+        var existingCountry = $("<p id='modalMsg'>");
+        existingCountry.text("You have already saved this recipe"); // will style later
+        $("#modal-box").append(existingCountry);
+      }
+      //adding a 2000ms delay to the modal fadeout for when you click the yes button so user can see status.
+      //adding a call back function to remove the modal when it's been clicked
+      setTimeout(function () {
+        $("#modal-box").fadeOut(500, function () {
+          $("#modal-box").remove();
+        });
+      }, 2000);
+    }
+    // logic if 'NO' is clicked for modal button
+    else {
+      $("#modal-box").fadeOut(500, function () {
+        $("#modal-box").remove();
+      });
+    }
+  }
 
   //click listeners
   $("#submitBtn").on("click", countrySelection); //runs the function for picking a country at random based on user input and calls the API

@@ -257,3 +257,26 @@ $(function () {
 // citiesSearched.on("click", "li", function() {
 //return getCurrentWeather($(this).text());
 //});
+
+
+// Plan for Tuesday - ideally finish all working components 
+// LOGIC
+// . finish 'saved recipes' for user to see recll saved recipes
+// . API call for 'saved recipes'
+// .STYLE
+//         - consider changing html text
+//         - colour theme
+            // - layout
+            // -dropdown/nav bar 
+
+// .Add Antarctica - basic return or  Use GIPHY as Api call ?
+// .alt for flag API  when it is broken
+
+// STRETCH
+// -Continents as image  
+//           checkbox - highlight Continent
+//           click contitnent 
+// extra STRETCH           
+// Minify code - use 
+// https://developers.google.com/speed/pagespeed/module?
+

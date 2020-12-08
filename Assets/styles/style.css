@@ -1,0 +1,39 @@
+#nav-bar {
+  background-color: #006266;
+  color: white;
+}
+
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #006266;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10%;
+}
+
+button {
+  background-color: #006266;
+  color: white;
+}
+
+body {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.container {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}

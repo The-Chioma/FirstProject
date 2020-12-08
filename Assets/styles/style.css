@@ -1,17 +1,25 @@
+body {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
 #nav-bar {
   background-color: #006266;
   color: white;
 }
 
-#footer {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  background-color: #006266;
-  color: white;
-  text-align: center;
-  padding: 10px;
+#mainDiv {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#dish-container{
+  margin-bottom: 100px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 img {
@@ -26,14 +34,41 @@ button {
   color: white;
 }
 
-body {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+.continent-boxes{
+  text-align: left;
+  width: 50%;
+  margin: 0 auto;
 }
 
-.container {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
+
+#footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #006266;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+#modal-box{
+  padding: 5%;
+  position: fixed;
+  z-index: 1000;
+  background-color: #006366dc;
+  border-radius: 4px;
+  height: 25%;
+  width: 60%;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.confirmBtn{
+  margin: 10px;
+  background-color:  white;
+  border-radius: 3px;
+  padding: 5px;
+
 }

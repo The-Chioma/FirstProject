@@ -32,7 +32,7 @@ console.log(response);
     dropdownBtn.text("Saved Recipes ");
     var dropdownIcon = $("<i class='fas fa-utensils'>");
     dropdownBtn.append(dropdownIcon);
-    $("#mainDiv").append(dropdownBtn);
+    $("#mobile-menu-btn").append(dropdownBtn);
   }
 
   function countrySelection() {
@@ -187,8 +187,8 @@ console.log(response);
 
   function modalDisplay() {
     //we create a modal box which will display in front of content for user to save recipes to local storage
-    var modalContainer = $("<div id='modal-box'>");
-    var modalHeader = $("<h2 id='modal-header'>");
+    var modalContainer = $("<div class='text-center' id='modal-box'>");
+    var modalHeader = $("<h2 class='font-semibold' id='modal-header'>");
     // we grab the current country name from the html data attribute;
     var countryName = $("#countryHeader").attr("data-countryName");
     modalHeader.text(`Would you like to save this recipe from ${countryName}?`);
@@ -196,12 +196,12 @@ console.log(response);
     // we add yes and no buttons for user to confirm
 
     //we give each the same class so we can add one click listener. We will add style with tailwind
-    var yesBtn = $("<button class='confirmBtn' id='yesBtn'>");
+    var yesBtn = $("<button class='confirmBtn font-semibold' id='yesBtn'>");
     var yesIcon = $('<i class="fas fa-check">');
     yesBtn.text("Yes ");
     yesBtn.append(yesIcon);
 
-    var noBtn = $("<button class='confirmBtn' id='noBtn'>");
+    var noBtn = $("<button class='confirmBtn font-semibold' id='noBtn'>");
     var noIcon = $("<i class='fas fa-times'>");
     noBtn.text("No ");
     noBtn.append(noIcon);

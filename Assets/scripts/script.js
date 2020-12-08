@@ -136,6 +136,7 @@ console.log(response);
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
                 flagImgElement.attr("src", flagImageSrc);
                 flagImgElement.attr("data-flagCode", flagCode);
+                displayHeader.append(flagImgElement);
               // need to an an error 521 hadle - GIPHY ?
               
               // statusCode: {
@@ -148,7 +149,7 @@ console.log(response);
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
-          displayHeader,flagImgElement,
+          displayHeader,
           titleEl,
           dishImgEl,
           ingredientsHeading,

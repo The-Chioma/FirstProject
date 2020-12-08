@@ -1,4 +1,5 @@
 $(function () {
+  const GIPHYapikey = "p5Mlbpqfhr1G6JgLJjllx3vHl0MdWEoY"
   const apikey = "5d40d9682d6a4dbd937695decef827d3"; //3
   // "0ca619dbe1c54687905affcae7c39231" //1
   // "813168050135472e9820b823b47943fa";//2
@@ -6,11 +7,24 @@ $(function () {
   //user must select 1 min - max 7
   //user clicks 'submit' event listner
   // build up country selection form continents
+  
+// added GIPHY api call for Antactica and flag 521 error code
+ var GIPHYurl = "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" + GIPHYapikey + "&limit=10"
+
+ $.ajax({
+  url: GIPHYurl,
+  method: "GET",
+  success: function (response) {
+console.log(response);
+  }
+} 
+  )
+
 
   var prevRecipes = [];
 
   var dropdownMenuIsDown = false;
-
+  
   if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
     //we check to see if localstorage does not equal null. If so, then we store it in the variable
     prevRecipes = JSON.parse(localStorage.getItem("prevCountriesRecipe"));
@@ -278,15 +292,15 @@ $(function () {
 
 // Plan for Tuesday - ideally finish all working components 
 // LOGIC
-// . finish 'saved recipes' for user to see recll saved recipes
-// . API call for 'saved recipes'
+// . finish 'saved recipes' for user to see recll saved recipes XX
+// . API call for 'saved recipes' XXX
 // .STYLE
 //         - consider changing html text
 //         - colour theme
             // - layout
             // -dropdown/nav bar 
 
-// .Add Antarctica - basic return or  Use GIPHY as Api call ?
+// .Add Antarctica - basic return or  Use GIPHY as Api call ?  
 // .alt for flag API  when it is broken
 
 // STRETCH

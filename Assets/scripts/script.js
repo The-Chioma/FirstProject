@@ -77,7 +77,8 @@ $(function () {
 
         var dishTitle = response.title;
         var titleEl = $("<h3 id='dish-header'>");
-        titleEl.attr("data-dishId", id); // save the id for the recipe so we can access it later for local storage
+        titleEl.attr("data-dishId", id); 
+        // save the id for the recipe so we can access it later for local storage
         titleEl.text(dishTitle);
 
         var dishImgSrc = response.image;
@@ -121,10 +122,19 @@ $(function () {
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
                 flagImgElement.attr("src", flagImageSrc);
                 flagImgElement.attr("data-flagCode", flagCode);
+              // need to an an error 521 hadle - GIPHY ?
+              
+              // statusCode: {
+              //   521: function () {
+              //    
+              //     alert("Sorrythe flag for 'countryName' is currenlty not working );
+                    //link giphy
+              //   },
+              // },
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
-          displayHeader,
+          displayHeader,flagImgElement,
           titleEl,
           dishImgEl,
           ingredientsHeading,
@@ -132,7 +142,7 @@ $(function () {
           recipeHeading,
           recipeList,
           saveBtn,
-          flagImgElement
+          
         );
 
       },
@@ -143,8 +153,9 @@ $(function () {
       var dropmenuList = $("<ul id='dropdownList'>");
       dropmenuList.css("display", "none");
       prevRecipes.forEach(country => {
+        // looping through prev recipe array to create clickable list items for each country
         var countryListElement = $("<li class='dropdownItem'>");//temporary classname to be changed with tailwind;
-        countryListElement.text(country.countryName).attr('data-listId', country.id);
+        countryListElement.text(country.countryName).attr('data-recipeId', country.id).attr('data-flagID',country.flagId );
         dropmenuList.append(countryListElement);
       })
       $("body").append(dropmenuList);
@@ -199,7 +210,7 @@ $(function () {
       console.log('the country name is', countryToBeSaved.countryName);
       console.log('the ID is', countryToBeSaved.id);
       //we create an object with the data we need
-
+     
       // logic to check local storage for existing Country, using every method to check the countryname of each object
       if (
         prevRecipes.every((dishElement) => {
@@ -245,8 +256,14 @@ $(function () {
   $("body").on("click", "button.confirmBtn", saveToLocalStorage); // save button on click function, save to local storage
 
   $("body").on("click", "button#historyDropdownBtn", displayDropdown);
-
-  
+// added click listener for saved recipes from storage to make a second call to the API 
+  $("body").on("click", "li.dropdownItem", function(){
+    var countryName = $(this).text();
+    var dishID = $(this).attr('data-recipeId')
+    var flagID = $(this).attr('data-flagID')
+   
+    getRecipe(countryName, dishID, flagID)
+  });
 });
 
 //check if local storage exists X

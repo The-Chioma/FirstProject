@@ -1,8 +1,43 @@
+body {
+  display: block;
+  margin-left: auto;
+  margin-right: auto
+}
+
 #nav-bar {
   background-color: #006266;
   color: white;
   
 }
+
+#mainDiv {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+#dish-container{
+  margin-bottom: 100px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+img {
+    
+}
+
+button {
+  background-color: #006266;
+  color: white;
+}
+
+.continent-boxes{
+  text-align: left;
+  width: 50%;
+  margin: 0 auto;
+}
+
 
 #footer {
   position: fixed;
@@ -15,23 +50,23 @@
   padding: 10px;
 }
 
-img {
-    
+#modal-box{
+  padding: 5%;
+  position: fixed;
+  z-index: 1000;
+  background-color: #006366dc;
+  border-radius: 4px;
+  height: 25%;
+  width: 60%;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-button {
-  background-color: #006266;
-  color: white;
-}
+.confirmBtn{
+  margin: 10px;
+  background-color:  white;
+  border-radius: 3px;
+  padding: 5px;
 
-body {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
-}
-
-.container {
-    display: block;
-    margin-left: auto;
-    margin-right: auto
 }

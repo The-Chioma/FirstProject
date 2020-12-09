@@ -1,5 +1,5 @@
 $(function () {
-  const GIPHYapikey = "p5Mlbpqfhr1G6JgLJjllx3vHl0MdWEoY"
+  const GIPHYapikey = "p5Mlbpqfhr1G6JgLJjllx3vHl0MdWEoY";
   const apikey = "5d40d9682d6a4dbd937695decef827d3"; //3
   // "0ca619dbe1c54687905affcae7c39231" //1
   // "813168050135472e9820b823b47943fa";//2
@@ -7,33 +7,26 @@ $(function () {
   //user must select 1 min - max 7
   //user clicks 'submit' event listner
   // build up country selection form continents
-  
-// added GIPHY api call for Antactica and flag 521 error code
 
 
- //$("#antarctica").is(":checked",function () {
-//   console.log( getGiphy),
- 
+  // added GIPHY api call for Antactica and flag 521 error code
+  var GIPHYurl =
+    "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" +
+    GIPHYapikey +
+    "&limit=10";
 
- 
-
- //})
-
-//$("<img 'id='antarcticaIMG'>");
-// console.log(response);
-//var newgif = response.data[0].bitly_url
-//$("<img 'id='antarcticaIMG'>").append (newgif)
-//console.log(response.data[0].bitly_url);
-//var addGiphy = 
- 
-
-  
-
+  $.ajax({
+    url: GIPHYurl,
+    method: "GET",
+    success: function (response) {
+      console.log(response);
+    },
+  });
 
   var prevRecipes = [];
 
   var dropdownMenuIsDown = false;
-  
+
   if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
     //we check to see if localstorage does not equal null. If so, then we store it in the variable
     prevRecipes = JSON.parse(localStorage.getItem("prevCountriesRecipe"));
@@ -41,7 +34,7 @@ $(function () {
     dropdownBtn.text("Saved Recipes ");
     var dropdownIcon = $("<i class='fas fa-utensils'>");
     dropdownBtn.append(dropdownIcon);
-    $("#mainDiv").append(dropdownBtn);
+    $("#mobile-menu-btn").append(dropdownBtn);
   }
 
   function countrySelection() {
@@ -102,11 +95,11 @@ $(function () {
     //get the id from the country
     var id = randomCountry.id;
     //get the flagcode from the country object
-    var flagCode = randomCountry.flagCode;  
+    var flagCode = randomCountry.flagCode;
     getRecipe(countryName, id, flagCode);
-  };
+  }
 
-  function getRecipe(countryName, id, flagCode){
+  function getRecipe(countryName, id, flagCode) {
     var queryurl =
       `https://api.spoonacular.com/recipes/${id}/information?apiKey=` + apikey;
 
@@ -125,7 +118,7 @@ $(function () {
 
         var dishTitle = response.title;
         var titleEl = $("<h3 id='dish-header'>");
-        titleEl.attr("data-dishId", id); 
+        titleEl.attr("data-dishId", id);
         // save the id for the recipe so we can access it later for local storage
         titleEl.text(dishTitle);
 
@@ -164,6 +157,7 @@ $(function () {
         var saveIcon = $("<i class='fas fa-hamburger'>");
         saveBtn.text("Save Recipe");
         saveBtn.append(saveIcon);
+
                 //creates an img element with the flag source
                 var flagImgElement = $("<img id= 'flagImg'>");
                 //creates the img source
@@ -200,6 +194,24 @@ $(function () {
               //   },
               // },
 
+        //creates an img element with the flag source
+        var flagImgElement = $("<img id= 'flagImg'>");
+        //creates the img source
+        var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
+        flagImgElement.attr("src", flagImageSrc);
+        flagImgElement.attr("data-flagCode", flagCode);
+        displayHeader.append(flagImgElement);
+        // need to an an error 521 hadle - GIPHY ?
+
+        // statusCode: {
+        //   521: function () {
+        //
+        //     alert("Sorrythe flag for 'countryName' is currenlty not working );
+        //link giphy
+        //   },
+        // },
+
+
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
           displayHeader,
@@ -209,40 +221,56 @@ $(function () {
           ingredientsList,
           recipeHeading,
           recipeList,
-          saveBtn,
-          
+          saveBtn
         );
-
       },
     });
   }
-  function displayDropdown(){
-    if (!dropdownMenuIsDown){
+  function displayDropdown() {
+    if (!dropdownMenuIsDown) {
       var dropmenuList = $("<ul id='dropdownList'>");
-      dropmenuList.css("display", "none");
-      prevRecipes.forEach(country => {
+      for (var i = 0; i<prevRecipes.length && i<10; i++){
         // looping through prev recipe array to create clickable list items for each country
-        var countryListElement = $("<li class='dropdownItem'>");//temporary classname to be changed with tailwind;
-        countryListElement.text(country.countryName).attr('data-recipeId', country.id).attr('data-flagID',country.flagId );
+        var country = prevRecipes[i]
+        var countryListElement = $("<li class='dropdownItem'>"); //temporary classname to be changed with tailwind;
+        countryListElement
+          .text(country.countryName)
+          .attr("data-recipeId", country.id)
+          .attr("data-flagID", country.flagId);
         dropmenuList.append(countryListElement);
-      })
+      }
       $("body").append(dropmenuList);
-      $("#dropdownList").slideDown(400);
+      // this is the logic for moving the dropdown from off the page to fixed on to the left hand side
+      $("#dropdownList").animate(
+        {
+          "left": "+=100px",
+        },1000);
+
       dropdownMenuIsDown = true;
     } else {
-      $("#dropdownList").slideUp(400, function(){
-        $("#dropdownList").remove();
-      });
-      dropdownMenuIsDown = false;
-      
+      closeDropdown();
     }
+  }
 
+  function closeDropdown(){
+    //if the dropdown is visible, close it by moving it off the page and then removing it
+    if (dropdownMenuIsDown){
+      $("#dropdownList").animate(
+        {
+          "left": "-=100px",
+        },
+        1000, function () {
+          $("#dropdownList").remove();
+        }
+      );
+      dropdownMenuIsDown = false;
+    }
   }
 
   function modalDisplay() {
     //we create a modal box which will display in front of content for user to save recipes to local storage
-    var modalContainer = $("<div id='modal-box'>");
-    var modalHeader = $("<h2 id='modal-header'>");
+    var modalContainer = $("<div class='text-center' id='modal-box'>");
+    var modalHeader = $("<h2 class='font-semibold' id='modal-header'>");
     // we grab the current country name from the html data attribute;
     var countryName = $("#countryHeader").attr("data-countryName");
     modalHeader.text(`Would you like to save this recipe from ${countryName}?`);
@@ -250,12 +278,12 @@ $(function () {
     // we add yes and no buttons for user to confirm
 
     //we give each the same class so we can add one click listener. We will add style with tailwind
-    var yesBtn = $("<button class='confirmBtn' id='yesBtn'>");
+    var yesBtn = $("<button class='confirmBtn font-semibold' id='yesBtn'>");
     var yesIcon = $('<i class="fas fa-check">');
     yesBtn.text("Yes ");
     yesBtn.append(yesIcon);
 
-    var noBtn = $("<button class='confirmBtn' id='noBtn'>");
+    var noBtn = $("<button class='confirmBtn font-semibold' id='noBtn'>");
     var noIcon = $("<i class='fas fa-times'>");
     noBtn.text("No ");
     noBtn.append(noIcon);
@@ -273,12 +301,12 @@ $(function () {
       var countryToBeSaved = {
         countryName: countryName,
         id: dishId,
-        flagId: flagId
+        flagId: flagId,
       };
-      console.log('the country name is', countryToBeSaved.countryName);
-      console.log('the ID is', countryToBeSaved.id);
+      console.log("the country name is", countryToBeSaved.countryName);
+      console.log("the ID is", countryToBeSaved.id);
       //we create an object with the data we need
-     
+
       // logic to check local storage for existing Country, using every method to check the countryname of each object
       if (
         prevRecipes.every((dishElement) => {
@@ -286,7 +314,7 @@ $(function () {
           return dishElement.countryName !== countryName;
         })
       ) {
-        prevRecipes.push(countryToBeSaved);
+        prevRecipes.unshift(countryToBeSaved);
         localStorage.setItem(
           "prevCountriesRecipe",
           JSON.stringify(prevRecipes)
@@ -324,14 +352,20 @@ $(function () {
   $("body").on("click", "button.confirmBtn", saveToLocalStorage); // save button on click function, save to local storage
 
   $("body").on("click", "button#historyDropdownBtn", displayDropdown);
-// added click listener for saved recipes from storage to make a second call to the API 
-  $("body").on("click", "li.dropdownItem", function(){
+  // added click listener for saved recipes from storage to make a second call to the API
+  $("body").on("click", "li.dropdownItem", function () {
+    closeDropdown();
     var countryName = $(this).text();
-    var dishID = $(this).attr('data-recipeId')
-    var flagID = $(this).attr('data-flagID')
-   
-    getRecipe(countryName, dishID, flagID)
+    var dishID = $(this).attr("data-recipeId");
+    var flagID = $(this).attr("data-flagID");
+
+    getRecipe(countryName, dishID, flagID);
   });
+  //click listener to close the sidebar if the user clicks anywhere on the screen that isn't part of the sidebar
+  $("body").on("click", ".container", closeDropdown)
+
+
+
 });
 
 //check if local storage exists X
@@ -343,25 +377,23 @@ $(function () {
 //return getCurrentWeather($(this).text());
 //});
 
-
-// Plan for Tuesday - ideally finish all working components 
+// Plan for Tuesday - ideally finish all working components
 // LOGIC
 // . finish 'saved recipes' for user to see recll saved recipes XX
 // . API call for 'saved recipes' XXX
 // .STYLE
 //         - consider changing html text
 //         - colour theme
-            // - layout
-            // -dropdown/nav bar 
+// - layout
+// -dropdown/nav bar
 
-// .Add Antarctica - basic return or  Use GIPHY as Api call ?  
+// .Add Antarctica - basic return or  Use GIPHY as Api call ?
 // .alt for flag API  when it is broken
 
 // STRETCH
-// -Continents as image  
+// -Continents as image
 //           checkbox - highlight Continent
-//           click contitnent 
-// extra STRETCH           
-// Minify code - use 
+//           click contitnent
+// extra STRETCH
+// Minify code - use
 // https://developers.google.com/speed/pagespeed/module?
-

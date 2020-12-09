@@ -79,6 +79,8 @@ button {
   height: 100%;
   width: 30%;
   background-color: #218c74;
+  color: white;
+  font-weight: 700;
 }
 
 @media(min-width: 769px){
@@ -98,9 +100,9 @@ button {
 .dropdownItem:hover{
   background-color: #36d4b2;
 }
-
+/* changing every other child of the dropdown unordered list */
 @media(max-width: 768px){
   .dropdownItem:nth-child(even){
-    background-color: #36d4b2;
+    background-color: #114d40;
   }
 }

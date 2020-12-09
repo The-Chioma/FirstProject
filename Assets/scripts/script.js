@@ -9,16 +9,25 @@ $(function () {
   // build up country selection form continents
   
 // added GIPHY api call for Antactica and flag 521 error code
- var GIPHYurl = "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" + GIPHYapikey + "&limit=10"
 
- $.ajax({
-  url: GIPHYurl,
-  method: "GET",
-  success: function (response) {
-console.log(response);
-  }
-} 
-  )
+
+ //$("#antarctica").is(":checked",function () {
+//   console.log( getGiphy),
+ 
+
+ 
+
+ //})
+
+//$("<img 'id='antarcticaIMG'>");
+// console.log(response);
+//var newgif = response.data[0].bitly_url
+//$("<img 'id='antarcticaIMG'>").append (newgif)
+//console.log(response.data[0].bitly_url);
+//var addGiphy = 
+ 
+
+  
 
 
   var prevRecipes = [];
@@ -57,13 +66,38 @@ console.log(response);
     if ($("#south-america").is(":checked")) {
       selectedCountriesArr.push(...southAmerica);
     }
-    //   if ($("#antarctica").is(":checked")) {
-    //     selectedCountriesArr.push(...antarctica);
-    //   }
+    if
+     ($("#antarctica").is(":checked")){
+       selectedCountriesArr.push("antarctica")
+     }
+    
     //generates a random number from 0 to the length of the dynamic array
     var randomNumber = Math.floor(Math.random() * selectedCountriesArr.length);
     //selects the country object;
     var randomCountry = selectedCountriesArr[randomNumber];
+    if (randomCountry === 'antarctica'){
+
+      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?q=ice&api_key=" + GIPHYapikey + "&limit=10"
+      $.ajax({
+       url: GIPHYurl,
+       method: "GET"
+      })
+     //.then(function (response) 
+     .then((response) => {
+        console.log(response);
+         var results = response.data;
+         var gifDiv = $("<div>");
+         console.log(results.images.fixed_height.url);
+
+         var iceIMG = $("<img>");
+      //   iceIMG.attr("src", results.images.fixed_height.url);
+         iceIMG.attr("src", results.images.fixed_height.url);
+         gifDiv.append(iceIMG);
+         $("#dish-container").append(gifDiv);
+     
+       });
+       return 
+    }
     var countryName = randomCountry.country;
     //get the id from the country
     var id = randomCountry.id;
@@ -138,12 +172,31 @@ console.log(response);
                 flagImgElement.attr("data-flagCode", flagCode);
                 displayHeader.append(flagImgElement);
               // need to an an error 521 hadle - GIPHY ?
-              
+              console.log(flagImageSrc);
               // statusCode: {
               //   521: function () {
               //    
-              //     alert("Sorrythe flag for 'countryName' is currenlty not working );
+              //     alert("Sorry the flag for 'countryName' is currenlty not working );
                     //link giphy
+                  //   GIPHYurl = "https://api.giphy.com/v1/gifs/random?q=broken&api_key=" + GIPHYapikey + "&limit=10"
+                  //   $.ajax({
+                  //    url: GIPHYurl,
+                  //    method: "GET"
+                  //   })
+                  //  //.then(function (response) 
+                  //  .then((response) => {
+                  //      console.log(response);
+                  //      var results = response.data;
+                   
+                  //      var gifDiv = $("<div>");
+                  //      var iceIMG = $("<img>");
+                  //      iceIMG.attr("src", results[i].images.fixed_height.url);
+                  //      gifDiv.append(iceIMG);
+                  //      $("#antartica").append(gifDiv);
+                   
+                  //    });
+                  //  }
+
               //   },
               // },
 

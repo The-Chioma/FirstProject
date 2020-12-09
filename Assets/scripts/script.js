@@ -165,16 +165,18 @@ $(function () {
   function displayDropdown() {
     if (!dropdownMenuIsDown) {
       var dropmenuList = $("<ul id='dropdownList'>");
-      prevRecipes.forEach((country) => {
+      for (var i = 0; i<prevRecipes.length && i<10; i++){
         // looping through prev recipe array to create clickable list items for each country
+        var country = prevRecipes[i]
         var countryListElement = $("<li class='dropdownItem'>"); //temporary classname to be changed with tailwind;
         countryListElement
           .text(country.countryName)
           .attr("data-recipeId", country.id)
           .attr("data-flagID", country.flagId);
         dropmenuList.append(countryListElement);
-      });
+      }
       $("body").append(dropmenuList);
+      // this is the logic for moving the dropdown from off the page to fixed on to the left hand side
       $("#dropdownList").animate(
         {
           "left": "+=100px",
@@ -187,15 +189,18 @@ $(function () {
   }
 
   function closeDropdown(){
-    $("#dropdownList").animate(
-      {
-        "left": "-=100px",
-      },
-      1000, function () {
-        $("#dropdownList").remove();
-      }
-    );
-    dropdownMenuIsDown = false;
+    //if the dropdown is visible, close it by moving it off the page and then removing it
+    if (dropdownMenuIsDown){
+      $("#dropdownList").animate(
+        {
+          "left": "-=100px",
+        },
+        1000, function () {
+          $("#dropdownList").remove();
+        }
+      );
+      dropdownMenuIsDown = false;
+    }
   }
 
   function modalDisplay() {
@@ -245,7 +250,7 @@ $(function () {
           return dishElement.countryName !== countryName;
         })
       ) {
-        prevRecipes.push(countryToBeSaved);
+        prevRecipes.unshift(countryToBeSaved);
         localStorage.setItem(
           "prevCountriesRecipe",
           JSON.stringify(prevRecipes)
@@ -292,6 +297,10 @@ $(function () {
 
     getRecipe(countryName, dishID, flagID);
   });
+  //click listener to close the sidebar if the user clicks anywhere on the screen that isn't part of the sidebar
+  $("body").on("click", ".container", closeDropdown)
+
+
 
 });
 

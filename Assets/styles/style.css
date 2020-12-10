@@ -23,9 +23,6 @@ body {
   padding-right: 10px;
 }
 
-img {
-    
-}
 
 button {
   background-color: #006266;
@@ -105,4 +102,11 @@ button {
   .dropdownItem:nth-child(even){
     background-color: #114d40;
   }
+}
+
+#antarcticaGIPH{
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  margin: 0 auto;
 }

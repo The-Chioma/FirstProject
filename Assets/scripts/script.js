@@ -9,20 +9,6 @@ $(function () {
   // build up country selection form continents
 
 
-  // added GIPHY api call for Antactica and flag 521 error code
-  // var GIPHYurl =
-  //   "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" +
-  //   GIPHYapikey +
-  //   "&limit=10";
-
-  // $.ajax({
-  //   url: GIPHYurl,
-  //   method: "GET",
-  //   success: function (response) {
-  //     console.log(response);
-  //   },
-  // });
-
   var prevRecipes = [];
 
   var dropdownMenuIsDown = false;
@@ -117,7 +103,7 @@ $(function () {
         );
 
         var dishTitle = response.title;
-        var titleEl = $("<h3 id='dish-header'>");
+        var titleEl = $("<h3 id='dish-header' class='page-heading'>");
         titleEl.attr("data-dishId", id);
         // save the id for the recipe so we can access it later for local storage
         titleEl.text(dishTitle);
@@ -126,36 +112,36 @@ $(function () {
         var dishImgEl = $("<img id='dish-img'>");
         dishImgEl.attr("src", dishImgSrc);
 
-        var ingredientsHeading = $("<h2>");
+        var ingredientsHeading = $("<h2 class='page-heading'>");
         ingredientsHeading.text("Ingredients:");
 
         //created and looped through the ingredients array
         var ingredientsArr = response.extendedIngredients;
         console.log(ingredientsArr);
-        var ingredientsList = $("<ul id='ingredients-list'>");
+        var ingredientsList = $("<ul id='ingredients-list '>");
         ingredientsArr.forEach((ingredient) => {
-          var ingredientsEl = $("<li class='ingredient'>");
+          var ingredientsEl = $("<li class='ingredient my-2'>");
           ingredientsEl.text(ingredient.original);
           ingredientsList.append(ingredientsEl);
         });
 
-        var recipeHeading = $("<h2>");
+        var recipeHeading = $("<h2 class='page-heading'>");
         recipeHeading.text("Recipe: ");
 
         //get the recipeArr
         var recipeArr = response.analyzedInstructions[0].steps;
         //create an ordered list
-        var recipeList = $("<ol id='recipe-list'>");
+        var recipeList = $("<ol id='recipe-list' class='list-decimal'>");
         //loop through the recipeArr and create the list elements and append
         recipeArr.forEach((step) => {
-          var recipeStepEl = $("<li class='recipe-step'>");
+          var recipeStepEl = $("<li class='recipe-step my-2'>");
           recipeStepEl.text(step.step);
           recipeList.append(recipeStepEl);
         });
 
-        var saveBtn = $("<button id='saveBtn'>");
+        var saveBtn = $("<button id='saveBtn' class='my-4'>");
         var saveIcon = $("<i class='fas fa-hamburger'>");
-        saveBtn.text("Save Recipe");
+        saveBtn.text("Save Recipe ");
         saveBtn.append(saveIcon);
 
                 //creates an img element with the flag source
@@ -164,15 +150,16 @@ $(function () {
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
                 flagImgElement.attr("src", flagImageSrc  + "sgdjhsgd");
                 flagImgElement.attr("data-flagCode", flagCode);
+
                 // Sometimes the flag API breaks so this is an alternative image
                 flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FRY.jpeg"));
                 displayHeader.append(flagImgElement);
              
 
-  
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
+          flagImgElement,
           displayHeader,
           titleEl,
           dishImgEl,
@@ -323,36 +310,11 @@ $(function () {
   //click listener to close the sidebar if the user clicks anywhere on the screen that isn't part of the sidebar
   $("body").on("click", ".container", closeDropdown)
 
-
+  $("#globe-image").on("click", function(){
+    
+    window.scrollTo(0,0)
+  })
 
 });
 
-//check if local storage exists X
-//store in variable X
-//give user access to prev storage
-//giver user option to save new LS x
 
-// citiesSearched.on("click", "li", function() {
-//return getCurrentWeather($(this).text());
-//});
-
-// Plan for Tuesday - ideally finish all working components
-// LOGIC
-// . finish 'saved recipes' for user to see recll saved recipes XX
-// . API call for 'saved recipes' XXX
-// .STYLE
-//         - consider changing html text
-//         - colour theme
-// - layout
-// -dropdown/nav bar
-
-// .Add Antarctica - basic return or  Use GIPHY as Api call ?
-// .alt for flag API  when it is broken
-
-// STRETCH
-// -Continents as image
-//           checkbox - highlight Continent
-//           click contitnent
-// extra STRETCH
-// Minify code - use
-// https://developers.google.com/speed/pagespeed/module?

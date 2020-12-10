@@ -1,12 +1,16 @@
 body {
   display: block;
   margin-left: auto;
-  margin-right: auto
+  margin-right: auto;
+  font-size: 16px;
 }
 
 #nav-bar {
   background-color: #006266;
   color: white;
+  position: fixed;
+  top: 0;
+  width: 100%;
   
 }
 
@@ -16,13 +20,33 @@ body {
   margin-bottom: 20px;
 }
 
+#header-container{
+  margin-top: 50px;
+}
+
+#main-header{
+  font-family: 'Ubuntu', sans-serif;
+}
+
+#tagline{
+  font-size: 1.5rem;
+  margin-top: 20px;
+}
+
+#checkbox-header{
+  font-size: 1.4rem;
+}
+
+label{
+  font-size: 1.2rem;
+}
+
 #dish-container{
   margin-bottom: 100px;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
 }
-
 
 button {
   background-color: #006266;
@@ -33,6 +57,25 @@ button {
   text-align: left;
   width: 50%;
   margin: 0 auto;
+}
+
+@media (min-width: 769px){
+  .continent-boxes{
+    width: 25%;
+  }
+}
+
+#submitBtn{
+  padding: 4px 8px;
+  background-color: #006266;
+  color: white;
+  border-radius: 4px;
+}
+
+@media (min-width: 769px){
+  #submitBtn{
+    padding: 12px 24px;
+  }
 }
 
 
@@ -60,6 +103,15 @@ button {
   transform: translateX(-50%);
 }
 
+@media (min-width: 1000px){
+  #modal-header{
+    font-size: 1.5rem;
+  }
+  .continent-boxes{
+    width: 20%;
+  }
+}
+
 .confirmBtn{
   margin: 10px;
   background-color:  white;
@@ -72,7 +124,7 @@ button {
   position: fixed;
   top: 0;
   bottom: 0;
-  left: -100px;
+  left: -30vw;
   height: 100%;
   width: 30%;
   background-color: #218c74;
@@ -83,6 +135,9 @@ button {
 @media(min-width: 769px){
   #dropdownList{
     width: 20%;
+  }
+  .dropdownItem{
+    font-size: 1.5rem;
   }
 }
 
@@ -99,6 +154,8 @@ button {
 }
 /* changing every other child of the dropdown unordered list */
 @media(max-width: 768px){
+
+
   .dropdownItem:nth-child(even){
     background-color: #114d40;
   }

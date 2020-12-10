@@ -14,7 +14,9 @@
       href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <title>New Country New Dish</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+    <title>New Dish, Who Dis!</title>
   </head>
 
   <body>
@@ -40,13 +42,14 @@
 
 
     <div class="container mx-auto text-center p-9" id="mainDiv">
-      <div id="tagline">
-        <h1 class="text-4xl font-semibold md:text-7xl">
+      <div id="header-container">
+        <h1 class="text-4xl font-semibold md:text-7xl" id="#main-header">
           New Dish, Who Dis!
         </h1>
+        <p class='font-semibold' id='tagline'>Dishes inspired by the world</p>
       </div>
       <br />
-      <h2>Choose any continents below you'll love to try a dish from:</h2>
+      <h2 id='checkbox-header'>Choose any continents below</h2>
       <br />
       <fieldset class="continent-boxes">
         <input type="checkbox" id="africa" name="africa" value="Africa" />
@@ -70,14 +73,14 @@
           name="north-america"
           value="North America"
         />
-        <label for="north america"> North America</label><br />
+        <label for="north-america"> North America</label><br />
         <input
           type="checkbox"
           id="south-america"
           name="south-america"
           value="South America"
         />
-        <label for="south america"> South America</label><br />
+        <label for="south-america"> South America</label><br />
       </fieldset>
       <br />
       <button type="submit" id="submitBtn">Submit</button>

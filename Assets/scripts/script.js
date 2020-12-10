@@ -246,7 +246,7 @@ $(function () {
       // this is the logic for moving the dropdown from off the page to fixed on to the left hand side
       $("#dropdownList").animate(
         {
-          "left": "+=100px",
+          "left": "0",
         },1000);
 
       dropdownMenuIsDown = true;
@@ -260,7 +260,7 @@ $(function () {
     if (dropdownMenuIsDown){
       $("#dropdownList").animate(
         {
-          "left": "-=100px",
+          "left": "-30vw",
         },
         1000, function () {
           $("#dropdownList").remove();

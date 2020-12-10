@@ -191,7 +191,7 @@ const northAmerica = [
     country: "El Salvador",
     dish: "Beef, Poblano & Cheese Tamales",
     language: "English",
-    flagCode: "ES",
+    flagCode: "SV",
     id: 634727,
   },
 ];

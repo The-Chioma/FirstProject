@@ -9,20 +9,6 @@ $(function () {
   // build up country selection form continents
 
 
-  // added GIPHY api call for Antactica and flag 521 error code
-  // var GIPHYurl =
-  //   "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" +
-  //   GIPHYapikey +
-  //   "&limit=10";
-
-  // $.ajax({
-  //   url: GIPHYurl,
-  //   method: "GET",
-  //   success: function (response) {
-  //     console.log(response);
-  //   },
-  // });
-
   var prevRecipes = [];
 
   var dropdownMenuIsDown = false;
@@ -70,26 +56,23 @@ $(function () {
     var randomCountry = selectedCountriesArr[randomNumber];
     if (randomCountry === 'antarctica'){
 
-      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?api_key=" + GIPHYapikey + "&tag=antartica"
+    //this is a 3rd API call for the Antarctica continent
+    //the call will return a random GIF everytime with a pg13 rating and key word of 'cold'
+      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?api_key=" + GIPHYapikey + "&tag=cold&rating=pg-13"
       
       $.ajax({
        url: GIPHYurl,
        method: "GET"
-      })
-
-     //.then(function (response) 
+      })     
      .then((response) => {
         console.log(response);
          var results = response.data;
-         var gifDiv = $("<div id= 'antarcticaGIPH'>");
+         var gifDiv = $("<div ] id= 'antarcticaGIPH'>");
          console.log(results.images.fixed_height.url);
-
-         var iceIMG = $("<img>");
-      //   iceIMG.attr("src", results.images.fixed_height.url);
-         iceIMG.attr("src", results.images.fixed_height.url);
-         gifDiv.append(iceIMG);
-         
-         $("#dish-container").append(gifDiv);
+         var iceIMG = $("<img>")
+         iceIMG.attr("src", results.images.downsized_large.url);
+         gifDiv.append(iceIMG);   
+         $("#dish-container").text("there is no food at Antartica").append(gifDiv);
      
        });
        return 
@@ -162,40 +145,17 @@ $(function () {
         saveBtn.append(saveIcon);
 
                 //creates an img element with the flag source
-                var flagImgElement = $("<img id= 'flagImg'>");
+                var flagImgElement = $("<img id='flagImg'>");
                 //creates the img source
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-                flagImgElement.attr("src", flagImageSrc);
+                flagImgElement.attr("src", flagImageSrc  + "sgdjhsgd");
                 flagImgElement.attr("data-flagCode", flagCode);
-                
-              // need to an an error 521 hadle - GIPHY ?
-              console.log(flagImageSrc);
-              // statusCode: {
-              //   521: function () {
-              //    
-              //     alert("Sorry the flag for 'countryName' is currenlty not working );
-                    //link giphy
-                  //   GIPHYurl = "https://api.giphy.com/v1/gifs/random?q=broken&api_key=" + GIPHYapikey + "&limit=10"
-                  //   $.ajax({
-                  //    url: GIPHYurl,
-                  //    method: "GET"
-                  //   })
-                  //  //.then(function (response) 
-                  //  .then((response) => {
-                  //      console.log(response);
-                  //      var results = response.data;
-                   
-                  //      var gifDiv = $("<div>");
-                  //      var iceIMG = $("<img>");
-                  //      iceIMG.attr("src", results[i].images.fixed_height.url);
-                  //      gifDiv.append(iceIMG);
-                  //      $("#antartica").append(gifDiv);
-                   
-                  //    });
-                  //  }
 
-              //   },
-              // },
+                // Sometimes the flag API breaks so this is an alternative image
+                flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FRY.jpeg"));
+                displayHeader.append(flagImgElement);
+             
+
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
@@ -357,32 +317,4 @@ $(function () {
 
 });
 
-//check if local storage exists X
-//store in variable X
-//give user access to prev storage
-//giver user option to save new LS x
 
-// citiesSearched.on("click", "li", function() {
-//return getCurrentWeather($(this).text());
-//});
-
-// Plan for Tuesday - ideally finish all working components
-// LOGIC
-// . finish 'saved recipes' for user to see recll saved recipes XX
-// . API call for 'saved recipes' XXX
-// .STYLE
-//         - consider changing html text
-//         - colour theme
-// - layout
-// -dropdown/nav bar
-
-// .Add Antarctica - basic return or  Use GIPHY as Api call ?
-// .alt for flag API  when it is broken
-
-// STRETCH
-// -Continents as image
-//           checkbox - highlight Continent
-//           click contitnent
-// extra STRETCH
-// Minify code - use
-// https://developers.google.com/speed/pagespeed/module?

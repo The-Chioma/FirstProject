@@ -70,26 +70,23 @@ $(function () {
     var randomCountry = selectedCountriesArr[randomNumber];
     if (randomCountry === 'antarctica'){
 
-      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?api_key=" + GIPHYapikey + "&tag=antartica"
+    //this is a 3rd API call for the Antarctica continent
+    //the call will return a random GIF everytime with a pg13 rating and key word of 'cold'
+      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?api_key=" + GIPHYapikey + "&tag=cold&rating=pg-13"
       
       $.ajax({
        url: GIPHYurl,
        method: "GET"
-      })
-
-     //.then(function (response) 
+      })     
      .then((response) => {
         console.log(response);
          var results = response.data;
-         var gifDiv = $("<div id= 'antarcticaGIPH'>");
+         var gifDiv = $("<div ] id= 'antarcticaGIPH'>");
          console.log(results.images.fixed_height.url);
-
-         var iceIMG = $("<img>");
-      //   iceIMG.attr("src", results.images.fixed_height.url);
-         iceIMG.attr("src", results.images.fixed_height.url);
-         gifDiv.append(iceIMG);
-         
-         $("#dish-container").append(gifDiv);
+         var iceIMG = $("<img>")
+         iceIMG.attr("src", results.images.downsized_large.url);
+         gifDiv.append(iceIMG);   
+         $("#dish-container").text("there is no food at Antartica").append(gifDiv);
      
        });
        return 
@@ -162,58 +159,17 @@ $(function () {
         saveBtn.append(saveIcon);
 
                 //creates an img element with the flag source
-                var flagImgElement = $("<img id= 'flagImg'>");
+                var flagImgElement = $("<img id='flagImg'>");
                 //creates the img source
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-                flagImgElement.attr("src", flagImageSrc);
+                flagImgElement.attr("src", flagImageSrc  + "sgdjhsgd");
                 flagImgElement.attr("data-flagCode", flagCode);
+                // Sometimes the flag API breaks so this is an alternative image
+                flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FRY.jpeg"));
                 displayHeader.append(flagImgElement);
-              // need to an an error 521 hadle - GIPHY ?
-              console.log(flagImageSrc);
-              // statusCode: {
-              //   521: function () {
-              //    
-              //     alert("Sorry the flag for 'countryName' is currenlty not working );
-                    //link giphy
-                  //   GIPHYurl = "https://api.giphy.com/v1/gifs/random?q=broken&api_key=" + GIPHYapikey + "&limit=10"
-                  //   $.ajax({
-                  //    url: GIPHYurl,
-                  //    method: "GET"
-                  //   })
-                  //  //.then(function (response) 
-                  //  .then((response) => {
-                  //      console.log(response);
-                  //      var results = response.data;
-                   
-                  //      var gifDiv = $("<div>");
-                  //      var iceIMG = $("<img>");
-                  //      iceIMG.attr("src", results[i].images.fixed_height.url);
-                  //      gifDiv.append(iceIMG);
-                  //      $("#antartica").append(gifDiv);
-                   
-                  //    });
-                  //  }
+             
 
-              //   },
-              // },
-
-        //creates an img element with the flag source
-        var flagImgElement = $("<img id= 'flagImg'>");
-        //creates the img source
-        var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-        flagImgElement.attr("src", flagImageSrc);
-        flagImgElement.attr("data-flagCode", flagCode);
-        displayHeader.append(flagImgElement);
-        // need to an an error 521 hadle - GIPHY ?
-
-        // statusCode: {
-        //   521: function () {
-        //
-        //     alert("Sorrythe flag for 'countryName' is currenlty not working );
-        //link giphy
-        //   },
-        // },
-
+  
 
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(

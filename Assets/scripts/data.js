@@ -62,6 +62,13 @@ const europe = [
     flagCode: "SE",
     id: 648565,
   },
+  {
+    country: "Cyprus",
+    dish: "Marinated Souvlaki",
+    language: "greek",
+    flagCode: "CY",
+    id: 651076,
+  },
 ];
 
 const africa = [
@@ -320,13 +327,7 @@ const asia = [
     flagCode: "TH",
     id: 663121,
   },
-  {
-    country: "Cyprus",
-    dish: "Marinated Souvlaki",
-    language: "greek",
-    flagCode: "CY",
-    id: 651076,
-  },
+
 ];
 
 const oceania = [

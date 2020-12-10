@@ -318,6 +318,7 @@ $(function () {
   });
   //click listener to close the sidebar if the user clicks anywhere on the screen that isn't part of the sidebar
   $("body").on("click", ".container", closeDropdown)
+  $("body").on("click", "#dish-container", closeDropdown)
 
   $("#globe-image").on("click", function(){
     

@@ -13,14 +13,19 @@ $(function () {
 
   var dropdownMenuIsDown = false;
 
-  if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
-    //we check to see if localstorage does not equal null. If so, then we store it in the variable
-    prevRecipes = JSON.parse(localStorage.getItem("prevCountriesRecipe"));
+  function createSidebar(){
     var dropdownBtn = $("<button id='historyDropdownBtn'>");
     dropdownBtn.text("Saved Recipes ");
     var dropdownIcon = $("<i class='fas fa-utensils'>");
     dropdownBtn.append(dropdownIcon);
     $("#mobile-menu-btn").append(dropdownBtn);
+  }
+
+  if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
+    //we check to see if localstorage does not equal null. If so, then we store it in the variable
+    prevRecipes = JSON.parse(localStorage.getItem("prevCountriesRecipe"));
+  
+    createSidebar()
   }
 
   function countrySelection() {
@@ -67,7 +72,7 @@ $(function () {
      .then((response) => {
         console.log(response);
          var results = response.data;
-         var gifDiv = $("<div ] id= 'antarcticaGIPH'>");
+         var gifDiv = $("<div id= 'antarcticaGIPH'>");
          console.log(results.images.fixed_height.url);
          var iceIMG = $("<img>")
          iceIMG.attr("src", results.images.downsized_large.url);
@@ -144,16 +149,16 @@ $(function () {
         saveBtn.text("Save Recipe ");
         saveBtn.append(saveIcon);
 
-                //creates an img element with the flag source
-                var flagImgElement = $("<img id='flagImg'>");
-                //creates the img source
-                var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-                flagImgElement.attr("src", flagImageSrc  + "sgdjhsgd");
-                flagImgElement.attr("data-flagCode", flagCode);
+        //creates an img element with the flag source
+        var flagImgElement = $("<img id='flagImg'>");
+        //creates the img source
+        var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
+        flagImgElement.attr("src", flagImageSrc);
+        flagImgElement.attr("data-flagCode", flagCode);
 
-                // Sometimes the flag API breaks so this is an alternative image
-                flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FRY.jpeg"));
-                displayHeader.append(flagImgElement);
+        // Sometimes the flag API breaks so this is an alternative image
+        flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FRY.jpeg"));
+        displayHeader.append(flagImgElement);
              
 
 
@@ -249,8 +254,9 @@ $(function () {
         id: dishId,
         flagId: flagId,
       };
-      console.log("the country name is", countryToBeSaved.countryName);
-      console.log("the ID is", countryToBeSaved.id);
+
+
+
       //we create an object with the data we need
 
       // logic to check local storage for existing Country, using every method to check the countryname of each object
@@ -268,6 +274,9 @@ $(function () {
         var successMsg = $("<p id='modalSuccessMsg'>");
         successMsg.text("You have successfully saved this recipe"); // will style later
         $("#modal-box").append(successMsg);
+        if (prevRecipes.length === 1){
+          createSidebar()
+        }
       } else {
         // logic if user has already saved this recipe to storage
         var existingCountry = $("<p id='modalMsg'>");
@@ -280,7 +289,7 @@ $(function () {
         $("#modal-box").fadeOut(500, function () {
           $("#modal-box").remove();
         });
-      }, 2000);
+      }, 500);
     }
     // logic if 'NO' is clicked for modal button
     else {

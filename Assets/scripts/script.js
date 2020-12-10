@@ -120,7 +120,7 @@ $(function () {
         );
 
         var dishTitle = response.title;
-        var titleEl = $("<h3 id='dish-header'>");
+        var titleEl = $("<h3 id='dish-header' class='page-heading'>");
         titleEl.attr("data-dishId", id);
         // save the id for the recipe so we can access it later for local storage
         titleEl.text(dishTitle);
@@ -129,36 +129,36 @@ $(function () {
         var dishImgEl = $("<img id='dish-img'>");
         dishImgEl.attr("src", dishImgSrc);
 
-        var ingredientsHeading = $("<h2>");
+        var ingredientsHeading = $("<h2 class='page-heading'>");
         ingredientsHeading.text("Ingredients:");
 
         //created and looped through the ingredients array
         var ingredientsArr = response.extendedIngredients;
         console.log(ingredientsArr);
-        var ingredientsList = $("<ul id='ingredients-list'>");
+        var ingredientsList = $("<ul id='ingredients-list '>");
         ingredientsArr.forEach((ingredient) => {
-          var ingredientsEl = $("<li class='ingredient'>");
+          var ingredientsEl = $("<li class='ingredient my-2'>");
           ingredientsEl.text(ingredient.original);
           ingredientsList.append(ingredientsEl);
         });
 
-        var recipeHeading = $("<h2>");
+        var recipeHeading = $("<h2 class='page-heading'>");
         recipeHeading.text("Recipe: ");
 
         //get the recipeArr
         var recipeArr = response.analyzedInstructions[0].steps;
         //create an ordered list
-        var recipeList = $("<ol id='recipe-list'>");
+        var recipeList = $("<ol id='recipe-list' class='list-decimal'>");
         //loop through the recipeArr and create the list elements and append
         recipeArr.forEach((step) => {
-          var recipeStepEl = $("<li class='recipe-step'>");
+          var recipeStepEl = $("<li class='recipe-step my-2'>");
           recipeStepEl.text(step.step);
           recipeList.append(recipeStepEl);
         });
 
-        var saveBtn = $("<button id='saveBtn'>");
+        var saveBtn = $("<button id='saveBtn' class='my-4'>");
         var saveIcon = $("<i class='fas fa-hamburger'>");
-        saveBtn.text("Save Recipe");
+        saveBtn.text("Save Recipe ");
         saveBtn.append(saveIcon);
 
                 //creates an img element with the flag source
@@ -167,7 +167,7 @@ $(function () {
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
                 flagImgElement.attr("src", flagImageSrc);
                 flagImgElement.attr("data-flagCode", flagCode);
-                displayHeader.append(flagImgElement);
+                
               // need to an an error 521 hadle - GIPHY ?
               console.log(flagImageSrc);
               // statusCode: {
@@ -197,26 +197,9 @@ $(function () {
               //   },
               // },
 
-        //creates an img element with the flag source
-        var flagImgElement = $("<img id= 'flagImg'>");
-        //creates the img source
-        var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-        flagImgElement.attr("src", flagImageSrc);
-        flagImgElement.attr("data-flagCode", flagCode);
-        displayHeader.append(flagImgElement);
-        // need to an an error 521 hadle - GIPHY ?
-
-        // statusCode: {
-        //   521: function () {
-        //
-        //     alert("Sorrythe flag for 'countryName' is currenlty not working );
-        //link giphy
-        //   },
-        // },
-
-
         //logic for ingredients is at the bottom and needs to be added
         $("#dish-container").append(
+          flagImgElement,
           displayHeader,
           titleEl,
           dishImgEl,
@@ -367,7 +350,10 @@ $(function () {
   //click listener to close the sidebar if the user clicks anywhere on the screen that isn't part of the sidebar
   $("body").on("click", ".container", closeDropdown)
 
-
+  $("#globe-image").on("click", function(){
+    
+    window.scrollTo(0,0)
+  })
 
 });
 

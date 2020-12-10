@@ -29,12 +29,12 @@ body {
 }
 
 #tagline{
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-top: 20px;
 }
 
 #checkbox-header{
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 label{
@@ -46,6 +46,41 @@ label{
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.page-heading {
+color: #006266;
+font-size: 1.2rem;
+margin-top: 10px;
+margin-bottom: 10px;
+font-weight: 700;
+}
+
+#flagImg {
+  width: 20%;
+  margin: 0 auto;
+}
+
+#countryHeader {
+  font-size: 1.2rem;
+}
+
+#dish-img {
+  width: 80%;
+  margin: 0 auto;
+}
+
+#recipe-list {
+  text-align: justify;
+  width: 90%;
+  margin: 0 auto;
+}
+
+#saveBtn {
+  padding: 4px 8px;
+  background-color: #006266;
+  color: white;
+  border-radius: 4px;
 }
 
 button {
@@ -62,6 +97,12 @@ button {
 @media (min-width: 769px){
   .continent-boxes{
     width: 25%;
+  }
+  #flagImg {
+    width: 100px;
+  }
+  #dish-img {
+    width: 400px;
   }
 }
 
@@ -109,6 +150,9 @@ button {
   }
   .continent-boxes{
     width: 20%;
+  }
+  #recipe-list {
+    width: 50%;
   }
 }
 

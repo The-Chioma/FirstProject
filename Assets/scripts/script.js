@@ -10,18 +10,18 @@ $(function () {
 
 
   // added GIPHY api call for Antactica and flag 521 error code
-  var GIPHYurl =
-    "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" +
-    GIPHYapikey +
-    "&limit=10";
+  // var GIPHYurl =
+  //   "https://api.giphy.com/v1/gifs/search?q=ice&api_key=" +
+  //   GIPHYapikey +
+  //   "&limit=10";
 
-  $.ajax({
-    url: GIPHYurl,
-    method: "GET",
-    success: function (response) {
-      console.log(response);
-    },
-  });
+  // $.ajax({
+  //   url: GIPHYurl,
+  //   method: "GET",
+  //   success: function (response) {
+  //     console.log(response);
+  //   },
+  // });
 
   var prevRecipes = [];
 
@@ -70,22 +70,25 @@ $(function () {
     var randomCountry = selectedCountriesArr[randomNumber];
     if (randomCountry === 'antarctica'){
 
-      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?q=ice&api_key=" + GIPHYapikey + "&limit=10"
+      var GIPHYurl = "https://api.giphy.com/v1/gifs/random?api_key=" + GIPHYapikey + "&tag=antartica"
+      
       $.ajax({
        url: GIPHYurl,
        method: "GET"
       })
+
      //.then(function (response) 
      .then((response) => {
         console.log(response);
          var results = response.data;
-         var gifDiv = $("<div>");
+         var gifDiv = $("<div id= 'antarcticaGIPH'>");
          console.log(results.images.fixed_height.url);
 
          var iceIMG = $("<img>");
       //   iceIMG.attr("src", results.images.fixed_height.url);
          iceIMG.attr("src", results.images.fixed_height.url);
          gifDiv.append(iceIMG);
+         
          $("#dish-container").append(gifDiv);
      
        });

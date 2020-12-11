@@ -49,11 +49,11 @@ label{
 }
 
 .page-heading {
-color: #006266;
-font-size: 1.2rem;
-margin-top: 10px;
-margin-bottom: 10px;
-font-weight: 700;
+  color: #006266;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-weight: 700;
 }
 
 #flagImg {
@@ -176,6 +176,15 @@ button {
   font-weight: 700;
 }
 
+.dropdownItem{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 10%;
+  font-size: 0.8rem;
+}
+
 @media(min-width: 769px){
   #dropdownList{
     width: 20%;
@@ -185,13 +194,7 @@ button {
   }
 }
 
-.dropdownItem{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 10%;
-}
+
 
 .dropdownItem:hover{
   background-color: #36d4b2;

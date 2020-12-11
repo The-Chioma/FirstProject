@@ -77,7 +77,7 @@ $(function () {
          var iceIMG = $("<img>")
          iceIMG.attr("src", results.images.downsized_large.url);
          gifDiv.append(iceIMG);   
-         $("#dish-container").text("there is no food at Antartica").append(gifDiv);
+         $("#dish-container").text("There is no food in Antartica").append(gifDiv);
      
        });
        return 

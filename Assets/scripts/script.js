@@ -148,13 +148,15 @@ $(function () {
                 var flagImgElement = $("<img id='flagImg'>");
                 //creates the img source
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-                flagImgElement.attr("src", flagImageSrc  + "sgdjhsgd");
+                flagImgElement.attr("src", flagImageSrc + "ghjh");
                 flagImgElement.attr("data-flagCode", flagCode);
 
                 // Sometimes the flag API breaks so this is an alternative image
-                flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FRY.jpeg"));
+                flagImgElement.on("error", () => flagImgElement.attr("src","Assets/FryFlag.png").css({"height": "200px", "width": "280px"}));
+                
+               // flagImgElement.on("error").text("This should be a flag but the API server host is a bit sketchy!")
                 displayHeader.append(flagImgElement);
-             
+               // flagImgElement.before("<p> This should be a flag but the API server host is a bit sketchy!</p>")
 
 
         //logic for ingredients is at the bottom and needs to be added

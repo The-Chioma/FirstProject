@@ -1,7 +1,6 @@
-# FirstProject
-https://github.com/The-Chioma/FirstProject
+# New Dish, Who Dis
 
-https://the-chioma.github.io/FirstProject/
+[Live](https://the-chioma.github.io/FirstProject/)
 
 An Inspired by the current global pandemic, with the increase of more people at home and cooking we wanted to create an app to make those experiences more fun
 

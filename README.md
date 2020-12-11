@@ -1,4 +1,8 @@
 # FirstProject
+https://github.com/The-Chioma/FirstProject
+
+https://the-chioma.github.io/FirstProject/
+
 An Inspired by the current global pandemic, with the increase of more people at home and cooking we wanted to create an app to make those experiences more fun
 
 We wanted to give people the chance to be inspired by recipes they may never have come across before in their normal recipe searches.  Our app will present a recipe inspired by a country with an Image of the flag for that country.

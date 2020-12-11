@@ -154,7 +154,7 @@ $(function () {
                 var flagImgElement = $("<img id='flagImg'>");
                 //creates the img source
                 var flagImageSrc = `https://www.countryflags.io/${flagCode}/flat/64.png`; // image
-                flagImgElement.attr("src", flagImageSrc + "ghjh");
+                flagImgElement.attr("src", flagImageSrc);
                 flagImgElement.attr("data-flagCode", flagCode);
 
                 // Sometimes the flag API breaks so this is an alternative image

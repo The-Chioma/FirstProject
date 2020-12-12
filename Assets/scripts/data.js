@@ -120,13 +120,13 @@ const africa = [
     id: 663987,
   },
 
-  {
-    country: "Mozambique",
-    dish: "Chicken Piri Piri with Spicy Rice",
-    language: "Portuguese",
-    flagCode: "MZ",
-    id: 638252,
-  },
+  // {
+  //   country: "Mozambique",
+  //   dish: "Chicken Piri Piri with Spicy Rice",
+  //   language: "Portuguese",
+  //   flagCode: "MZ",
+  //   id: 638252,
+  // },
 
   {
     country: "South Africa",

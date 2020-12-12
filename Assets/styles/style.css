@@ -137,11 +137,14 @@ button {
   z-index: 1000;
   background-color: #006366dc;
   border-radius: 4px;
-  height: 25%;
+  height: 30%;
   width: 60%;
   top: 25%;
   left: 50%;
   transform: translateX(-50%);
+}
+#modalMsg{
+  color:white
 }
 
 @media (min-width: 1000px){
@@ -153,6 +156,9 @@ button {
   }
   #recipe-list {
     width: 50%;
+  }
+  #modal-box{
+    height:25%;
   }
 }
 

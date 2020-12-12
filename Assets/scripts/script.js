@@ -285,19 +285,19 @@ $(function () {
         // logic if user has already saved this recipe to storage
         var existingCountry = $("<p id='modalMsg'>");
         existingCountry.text("You have already saved this recipe"); // will style later
-        $("#modal-box").append(existingCountry);
+        $("#modal-box").prepend(existingCountry);
       }
       //adding a 2000ms delay to the modal fadeout for when you click the yes button so user can see status.
       //adding a call back function to remove the modal when it's been clicked
       setTimeout(function () {
-        $("#modal-box").fadeOut(500, function () {
+        $("#modal-box").fadeOut(750, function () {
           $("#modal-box").remove();
         });
       }, 500);
     }
     // logic if 'NO' is clicked for modal button
     else {
-      $("#modal-box").fadeOut(500, function () {
+      $("#modal-box").fadeOut(750, function () {
         $("#modal-box").remove();
       });
     }

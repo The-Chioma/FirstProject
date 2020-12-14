@@ -11,14 +11,14 @@ $(function () {
 
   var prevRecipes = [];
 
-  var dropdownMenuIsDown = false;
+  var sideBarMenu = false;
 
   function createSidebar(){
-    var dropdownBtn = $("<button id='historyDropdownBtn'>");
-    dropdownBtn.text("Saved Recipes ");
-    var dropdownIcon = $("<i class='fas fa-utensils'>");
-    dropdownBtn.append(dropdownIcon);
-    $("#mobile-menu-btn").append(dropdownBtn);
+    var sideBarBTN = $("<button id='historysideBarBTN'>");
+    sideBarBTN.text("Saved Recipes ");
+    var sideBarIcon = $("<i class='fas fa-utensils'>");
+    sideBarBTN.append(sideBarIcon);
+    $("#mobile-menu-btn").append(sideBarBTN);
   }
 
   if (JSON.parse(localStorage.getItem("prevCountriesRecipe")) !== null) {
@@ -182,8 +182,8 @@ $(function () {
     });
   }
   function displayDropdown() {
-    if (!dropdownMenuIsDown) {
-      var dropmenuList = $("<ul id='dropdownList'>");
+    if (!sideBarMenu) {
+      var sideBarList = $("<ul id='dropdownList'>");
       for (var i = 0; i<prevRecipes.length && i<10; i++){
         // looping through prev recipe array to create clickable list items for each country
         var country = prevRecipes[i]
@@ -192,24 +192,24 @@ $(function () {
           .text(country.countryName)
           .attr("data-recipeId", country.id)
           .attr("data-flagID", country.flagId);
-        dropmenuList.append(countryListElement);
+        sideBarList.append(countryListElement);
       }
-      $("body").append(dropmenuList);
+      $("body").append(sideBarList);
       // this is the logic for moving the dropdown from off the page to fixed on to the left hand side
       $("#dropdownList").animate(
         {
           "left": "0",
         },1000);
 
-      dropdownMenuIsDown = true;
+      sideBarIsOut = true;
     } else {
-      closeDropdown();
+      closeSideBar();
     }
   }
 
-  function closeDropdown(){
+  function closeSideBar(){
     //if the dropdown is visible, close it by moving it off the page and then removing it
-    if (dropdownMenuIsDown){
+    if (sideBarIsOut){
       $("#dropdownList").animate(
         {
           "left": "-30vw",
@@ -218,7 +218,7 @@ $(function () {
           $("#dropdownList").remove();
         }
       );
-      dropdownMenuIsDown = false;
+      sideBarIsOut = false;
     }
   }
 
@@ -310,10 +310,10 @@ $(function () {
 
   $("body").on("click", "button.confirmBtn", saveToLocalStorage); // save button on click function, save to local storage
 
-  $("body").on("click", "button#historyDropdownBtn", displayDropdown);
+  $("body").on("click", "button#historysideBarBTN", displayDropdown);
   // added click listener for saved recipes from storage to make a second call to the API
   $("body").on("click", "li.dropdownItem", function () {
-    closeDropdown();
+    closeSideBar();
     var countryName = $(this).text();
     var dishID = $(this).attr("data-recipeId");
     var flagID = $(this).attr("data-flagID");
@@ -321,8 +321,8 @@ $(function () {
     getRecipe(countryName, dishID, flagID);
   });
   //click listener to close the sidebar if the user clicks anywhere on the screen that isn't part of the sidebar
-  $("body").on("click", ".container", closeDropdown)
-  $("body").on("click", "#dish-container", closeDropdown)
+  $("body").on("click", ".container", closeSideBar)
+  $("body").on("click", "#dish-container", closeSideBar)
 
   $("#globe-image").on("click", function(){
     
